@@ -33,7 +33,12 @@ gem 'devise'
 # Style
 gem 'bootstrap', '~> 4.3.1'
 
+# Env vars
 gem "figaro"
+
+# React
+gem 'webpacker'
+gem 'react-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
