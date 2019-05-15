@@ -10,10 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190514215441) do
+ActiveRecord::Schema.define(version: 20190515164213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ingridients", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quantities", force: :cascade do |t|
+    t.float    "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_ingridients", force: :cascade do |t|
+    t.string   "note"
+    t.integer  "recipe_id"
+    t.integer  "quantity_id"
+    t.integer  "unity_id"
+    t.integer  "ingridient_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["ingridient_id"], name: "index_recipe_ingridients_on_ingridient_id", using: :btree
+    t.index ["quantity_id"], name: "index_recipe_ingridients_on_quantity_id", using: :btree
+    t.index ["recipe_id"], name: "index_recipe_ingridients_on_recipe_id", using: :btree
+    t.index ["unity_id"], name: "index_recipe_ingridients_on_unity_id", using: :btree
+  end
+
+  create_table "recipe_steps", force: :cascade do |t|
+    t.integer  "number"
+    t.string   "instructions"
+    t.integer  "recipe_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["recipe_id"], name: "index_recipe_steps_on_recipe_id", using: :btree
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "portions"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id", using: :btree
+  end
+
+  create_table "unities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
