@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Authentication
-gem 'devise'
+gem 'devise', '>= 4.7.1'
 
 # Style
 gem 'bootstrap', '~> 4.3.1'
